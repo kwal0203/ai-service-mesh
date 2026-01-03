@@ -1,6 +1,6 @@
 {{- if .Values.trafficSplit.enabled }}
-apiVersion: split.smi-spec.io/v1alpha2
-kind: TrafficSplit
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: {{ include "ai-service-mesh.fullname" . }}-{{ .Values.trafficSplit.service }}
   {{- if .Values.namespace }}
@@ -10,10 +10,15 @@ metadata:
     {{- include "ai-service-mesh.labels" . | nindent 4 }}
     app.kubernetes.io/component: {{ .Values.trafficSplit.service }}
 spec:
-  service: {{ include "ai-service-mesh.fullname" . }}-{{ .Values.trafficSplit.service }}
-  backends:
-    {{- range .Values.trafficSplit.backends }}
-    - service: {{ include "ai-service-mesh.fullname" $ }}-{{ .serviceSuffix }}
-      weight: {{ .weight }}
-    {{- end }}
+  parentRefs:
+    - name: {{ include "ai-service-mesh.fullname" . }}-{{ .Values.trafficSplit.service }}
+      kind: Service
+      group: ""
+  rules:
+    - backendRefs:
+        {{- range .Values.trafficSplit.backends }}
+        - name: {{ include "ai-service-mesh.fullname" $ }}-{{ .serviceSuffix }}
+          port: {{ default $.Values.trafficSplit.port .port }}
+          weight: {{ .weight }}
+        {{- end }}
 {{- end }}
