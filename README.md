@@ -26,6 +26,7 @@ Local and Docker-based testing options are documented in `docs/testing.md`.
 Local setup and verification steps are in `docs/linkerd-setup.md`.
 Smoke test for namespace injection is in `docs/linkerd-injection-smoke.md`.
 Traffic split (canary) demo is in `docs/linkerd-traffic-split.md`.
+Viz dashboard screenshot steps are in `docs/linkerd-viz-dashboard.md`.
 
 ## Project Plan
 The detailed plan is in `plan.md`.
