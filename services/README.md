@@ -9,6 +9,10 @@ This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service s
   - POST /predict: accepts a request and calls embedding + classifier
   - GET /healthz
   - GET /metrics
+- Config:
+  - EMBEDDING_URL (default: http://embedding:8001/embedding)
+  - CLASSIFIER_URL (default: http://classifier:8002/classifier)
+  - EVAL_URL (default: http://eval:8003/eval)
 
 ## Embedding API
 - Purpose: generate embeddings from text (CPU-only model)

@@ -35,6 +35,15 @@ spec:
           imagePullPolicy: {{ $.Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .port }}
+          {{- if eq .name "gateway" }}
+          env:
+            - name: EMBEDDING_URL
+              value: http://{{ include "ai-service-mesh.fullname" $ }}-embedding:8001/embedding
+            - name: CLASSIFIER_URL
+              value: http://{{ include "ai-service-mesh.fullname" $ }}-classifier:8002/classifier
+            - name: EVAL_URL
+              value: http://{{ include "ai-service-mesh.fullname" $ }}-eval:8003/eval
+          {{- end }}
           readinessProbe:
             httpGet:
               path: /healthz
