@@ -3,6 +3,10 @@ services:
     build:
       context: .
       dockerfile: services/gateway/Dockerfile
+    environment:
+      EMBEDDING_URL: http://embedding:8001/embedding
+      CLASSIFIER_URL: http://classifier:8002/classifier
+      EVAL_URL: http://eval:8003/eval
     ports:
       - "8000:8000"
     depends_on:
