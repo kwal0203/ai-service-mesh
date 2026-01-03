@@ -9,6 +9,7 @@
 - Introduce a canary version of one service (e.g., classifier).
 - Apply Linkerd TrafficSplit to send 90/10 traffic.
 - Show live split in Linkerd dashboard.
+- Capture Linkerd dashboard screenshot for docs/screenshots/linkerd-viz-dashboard.png.
 
 ## 3) Autoscaling
 - Apply load to /predict endpoint.
