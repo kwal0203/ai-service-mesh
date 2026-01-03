@@ -12,6 +12,7 @@
 - Capture Linkerd dashboard screenshot for docs/screenshots/linkerd-viz-dashboard.png.
 
 ## 3) Autoscaling
+- Apply the HPA demo manifest.
 - Apply load to /predict endpoint.
 - Observe HPA scaling on the target service.
 - Show CPU metrics and replica counts in Grafana.
