@@ -22,5 +22,8 @@ This repo hosts a two-node, CPU-only Kubernetes service mesh demo that runs on P
 ## Testing
 Local and Docker-based testing options are documented in `docs/testing.md`.
 
+## Linkerd
+Local setup and verification steps are in `docs/linkerd-setup.md`.
+
 ## Project Plan
 The detailed plan is in `plan.md`.
