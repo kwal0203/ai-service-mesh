@@ -1,0 +1,17 @@
+Why this service outline exists
+- Service contracts define inputs/outputs early so the Helm chart and demo flow are grounded before any model code is written.
+
+What is included
+- A minimal API surface per service (paths + payload shape) to keep integration clear.
+- Required health and metrics endpoints so autoscaling and observability can be demonstrated.
+- A small, CPU-friendly resource budget that matches the Optiplex hardware.
+
+How to build on it
+- Implement each service with FastAPI and keep request/response models in a shared schema module.
+- Add Prometheus metrics via a lightweight exporter (e.g., prometheus-client).
+- Start with stubbed responses, then swap in real models once traffic flow is stable.
+
+Updates in this step
+- Added a root pyproject.toml so uv can install dependencies and run services locally.
+- Added services/__init__.py so Python treats services as a package.
+- Added per-service Dockerfiles so each app can run in a container.

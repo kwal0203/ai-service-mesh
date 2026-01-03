@@ -1,0 +1,9 @@
+Why this script exists
+- Helm templates can be validated without a cluster. This catches YAML errors early and keeps changes safe.
+
+How to use it
+- Run `scripts/render-helm.sh` to render the local values to stdout.
+- Swap in `values-eks.yaml` if you want to validate the EKS overrides.
+
+What to extend later
+- Add `helm lint` or a second render for EKS once you have a CI pipeline.

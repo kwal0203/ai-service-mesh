@@ -19,5 +19,8 @@ This repo hosts a two-node, CPU-only Kubernetes service mesh demo that runs on P
 2. Sketch service interfaces and resource budgets for the 2–3 APIs.
 3. Draft the demo flow (traffic split + HPA + metrics).
 
+## Testing
+Local and Docker-based testing options are documented in `docs/testing.md`.
+
 ## Project Plan
 The detailed plan is in `plan.md`.
