@@ -1,0 +1,56 @@
+namespace: ai-mesh
+
+image:
+  pullPolicy: IfNotPresent
+
+mesh:
+  enabled: true
+  inject: enabled
+
+ingress:
+  enabled: true
+  className: nginx
+  host: ai-mesh.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+
+services:
+  - name: gateway
+    image: ghcr.io/example/gateway:0.1.0
+    port: 8000
+    path: /
+  - name: embedding
+    image: ghcr.io/example/embedding-api:0.1.0
+    port: 8001
+    path: /embedding
+  - name: classifier
+    image: ghcr.io/example/classifier-api:0.1.0
+    port: 8002
+    path: /classifier
+  - name: eval
+    image: ghcr.io/example/eval-api:0.1.0
+    port: 8003
+    path: /eval
+
+trafficSplit:
+  enabled: false
+  service: classifier
+  backends:
+    - name: classifier-stable
+      serviceSuffix: classifier
+      weight: 90
+    - name: classifier-canary
+      serviceSuffix: classifier-canary
+      weight: 10

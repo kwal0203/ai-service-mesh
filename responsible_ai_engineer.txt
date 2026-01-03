@@ -1,0 +1,37 @@
+﻿KANE WALTER San Francisco Bay Area | +1 415 714 8995 | kwal0203@gmail.com GitHub: github.com/kwal0203 | US Permanent Resident
+RESPONSIBLE AI ENGINEER Fairness • Robustness • Explainability • Privacy • Secure AI Deployment
+Responsible AI Engineer with 6+ years of experience designing (including PhD), evaluating, and deploying ethical and robust AI systems. Expertise in bias detection, LLM red teaming, and technical risk mitigation, with hands-on experience delivering cloud-deployed, auditable AI services. Published researcher in top-tier AI security venues with a proven track record of working across the full AI development lifecycle in collaborative, client-facing, and delivery-focused environments.
+TECHNICAL SKILLS
+* Responsible AI & Safety: Adversarial Robustness, Red Teaming, Bias Detection, AI Governance, Privacy-Preserving ML (Federated Learning), Toxicity Mitigation, Technical Guardrails.
+* Machine Learning/LLMs: PyTorch, HuggingFace, Llama-Factory, Fine-tuning (SFT/DPO), Scikit-learn.
+* Engineering & Data: Python, FastAPI, Docker, Streamlit, Pandas, Prometheus, Playwright (Testing).
+* Cloud & MLOps: AWS (EC2, S3, IAM, CloudWatch), Terraform, Kubernetes, Proxmox.
+* Professional: Technical White Papers, Agile/Scrum Leadership, Cross-functional Collaboration.
+PROFESSIONAL EXPERIENCE
+CSIRO, Sydney | Postdoctoral Research and Engineering Fellow | 01/2024 – Present
+* Lead for LLM Red Teaming: Developed RedTeamGo, a framework to evaluate bias, toxicity, and safety in LLM responses. Integrated technical guardrails to ensure model transparency and alignment with safety principles.
+* Responsible GenAI Systems: Built and deployed LLM-agent workflows using CrewAI, focusing on "Human-in-the-loop" research tools that prioritize data privacy and explainability.
+* Advanced Model Alignment: Fine-tuned Llama and Qwen models using Llama-Factory to produce reasoning-heavy models with specific focus on privacy-aware and robust outputs.
+* Policy & Governance: Authored a comprehensive taxonomy and white paper outlining adversarial threats and technical mitigations for LLM-based systems, serving as a roadmap for secure AI deployment.
+* Cross-Functional Leadership: Led a Scrum team of scientists and engineers to deliver a scalable AI platform; collaborated with UX and Product teams to ensure technical guardrails didn't compromise user experience.
+University of New South Wales, Sydney | Academic Instructor | 06/2019 – 12/2024
+* AI Education & Ethics: Taught Deep Learning and AI Fundamentals, focusing on the ethical implications of algorithmic bias and the importance of model interpretability.
+* Computer Science Instruction: Tutored undergraduate and postgraduate courses in data structures, algorithms, computer vision, and machine learning.
+* Mentorship: Guided 50+ students through ML prototyping for course projects, maintaining a top 5% instructor ranking for technical communication clarity.
+SELECTED CLOUD & RESPONSIBLE AI PROJECTS
+Responsible AI Evaluation Platform (AWS, Terraform, ECS/Fargate)
+* Built an end-to-end evaluation platform deployed on AWS using Terraform for reproducible infrastructure.
+* Deployed containerized LLM evaluation services (bias, robustness, toxicity) via FastAPI on ECS/Fargate behind an ALB.
+* Implemented secure artifact storage (S3) and access control via IAM to support auditable AI assessments.
+Kubernetes-Based AI Platform (Proxmox Cluster)
+* Designed a Kubernetes cluster on Proxmox to host containerized AI services and evaluation workloads.
+* Implemented networking and resource isolation to support scalable, cloud-agnostic AI deployment patterns.
+EDUCATION
+Doctor of Philosophy (PhD) – Machine Learning | University of New South Wales
+* Focus: Robustness and Security in Distributed ML (Federated Learning).
+* Key Achievement: Conducted novel research on mitigating backdoor attacks and improving adversarial robustness.
+Bachelor of Science – Computer Science (First Class Honours) | University of New South Wales
+* Thesis on Self-Supervised Learning (Published in IGARSS, 2020).
+PUBLICATIONS & RESEARCH
+* CORE-A Venues: Published 4+ peer-reviewed papers on AI security and robustness (ESORICS, AsiaCCS, TDSC).
+* Focus Areas: Federated Learning, Adversarial Defence, Feature Representation, and Self-Supervised Learning.

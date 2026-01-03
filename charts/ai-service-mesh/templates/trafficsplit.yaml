@@ -1,0 +1,19 @@
+{{- if .Values.trafficSplit.enabled }}
+apiVersion: split.smi-spec.io/v1alpha2
+kind: TrafficSplit
+metadata:
+  name: {{ include "ai-service-mesh.fullname" . }}-{{ .Values.trafficSplit.service }}
+  {{- if .Values.namespace }}
+  namespace: {{ .Values.namespace }}
+  {{- end }}
+  labels:
+    {{- include "ai-service-mesh.labels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ .Values.trafficSplit.service }}
+spec:
+  service: {{ include "ai-service-mesh.fullname" . }}-{{ .Values.trafficSplit.service }}
+  backends:
+    {{- range .Values.trafficSplit.backends }}
+    - service: {{ include "ai-service-mesh.fullname" $ }}-{{ .serviceSuffix }}
+      weight: {{ .weight }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,37 @@
+{{- range .Values.services }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" (include "ai-service-mesh.fullname" $) .name }}
+  {{- if $.Values.namespace }}
+  namespace: {{ $.Values.namespace }}
+  {{- end }}
+  labels:
+    {{- include "ai-service-mesh.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: {{ .name }}
+      app.kubernetes.io/instance: {{ $.Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{- include "ai-service-mesh.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: {{ .name }}
+      {{- if $.Values.mesh.enabled }}
+      annotations:
+        linkerd.io/inject: {{ $.Values.mesh.inject }}
+      {{- end }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: {{ .image }}
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .port }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+---
+{{- end }}

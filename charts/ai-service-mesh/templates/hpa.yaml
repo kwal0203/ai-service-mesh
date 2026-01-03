@@ -1,0 +1,29 @@
+{{- if .Values.hpa.enabled }}
+{{- range .Values.services }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ printf "%s-%s" (include "ai-service-mesh.fullname" $) .name }}
+  {{- if $.Values.namespace }}
+  namespace: {{ $.Values.namespace }}
+  {{- end }}
+  labels:
+    {{- include "ai-service-mesh.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ .name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ printf "%s-%s" (include "ai-service-mesh.fullname" $) .name }}
+  minReplicas: {{ $.Values.hpa.minReplicas }}
+  maxReplicas: {{ $.Values.hpa.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ $.Values.hpa.targetCPUUtilizationPercentage }}
+---
+{{- end }}
+{{- end }}

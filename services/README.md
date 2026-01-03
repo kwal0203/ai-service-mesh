@@ -1,0 +1,40 @@
+# Services Overview
+
+This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service should expose `/healthz` and `/metrics` endpoints.
+
+## Gateway
+- Purpose: fan-out and route requests to downstream services
+- Port: 8000
+- Endpoints:
+  - POST /predict: accepts a request and calls embedding + classifier
+  - GET /healthz
+  - GET /metrics
+
+## Embedding API
+- Purpose: generate embeddings from text (CPU-only model)
+- Port: 8001
+- Endpoints:
+  - POST /embedding: {"text": "..."} -> {"vector": [..]}
+  - GET /healthz
+  - GET /metrics
+
+## Classifier API
+- Purpose: run a lightweight classifier on an embedding
+- Port: 8002
+- Endpoints:
+  - POST /classifier: {"vector": [..]} -> {"label": "...", "score": 0.0}
+  - GET /healthz
+  - GET /metrics
+
+## Eval API
+- Purpose: rule-based checks for output validation
+- Port: 8003
+- Endpoints:
+  - POST /eval: {"label": "...", "score": 0.0} -> {"pass": true}
+  - GET /healthz
+  - GET /metrics
+
+## Resource Budgets (CPU-only)
+- Default requests: 100m CPU, 256Mi memory
+- Default limits: 500m CPU, 512Mi memory
+- HPA target: 70% CPU

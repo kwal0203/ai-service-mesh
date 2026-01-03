@@ -1,0 +1,22 @@
+{{- range .Values.services }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-%s" (include "ai-service-mesh.fullname" $) .name }}
+  {{- if $.Values.namespace }}
+  namespace: {{ $.Values.namespace }}
+  {{- end }}
+  labels:
+    {{- include "ai-service-mesh.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ .name }}
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: {{ .name }}
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+  ports:
+    - name: http
+      port: {{ .port }}
+      targetPort: {{ .port }}
+---
+{{- end }}
