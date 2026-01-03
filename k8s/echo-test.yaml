@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-test
+  template:
+    metadata:
+      labels:
+        app: echo-test
+    spec:
+      containers:
+        - name: echo-test
+          image: hashicorp/http-echo:1.0
+          args:
+            - "-text=echo-ok"
+          ports:
+            - containerPort: 5678
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-test
+spec:
+  selector:
+    app: echo-test
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5678
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echo-test
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: echo.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: echo-test
+                port:
+                  number: 80
