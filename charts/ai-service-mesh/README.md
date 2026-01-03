@@ -29,20 +29,32 @@ helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-eks
 When HPA is enabled with Linkerd injection, the chart sets proxy CPU requests
 via `mesh.proxyResources` to avoid `<unknown>` HPA targets.
 
-## Traffic Split (Linkerd SMI)
-To enable a canary split, add a second service entry for the canary and enable the split in values:
+## Traffic Split (Gateway API HTTPRoute)
+To enable a canary split with Gateway API HTTPRoute, add a second service entry
+for the canary and enable the split in values:
 
 ```
 trafficSplit:
   enabled: true
   service: classifier
+  port: 8002
   backends:
     - name: classifier-stable
       serviceSuffix: classifier
+      port: 8002
       weight: 90
     - name: classifier-canary
       serviceSuffix: classifier-canary
+      port: 8002
       weight: 10
 ```
 
 This assumes you have two Services named `<release>-classifier` and `<release>-classifier-canary`.
+Gateway API CRDs must be installed in the cluster.
+
+Example:
+```
+helm upgrade --install ai-mesh charts/ai-service-mesh \
+  -f charts/ai-service-mesh/values-local.yaml \
+  -f charts/ai-service-mesh/values-canary.yaml
+```

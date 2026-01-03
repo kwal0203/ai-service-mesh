@@ -50,10 +50,13 @@ services:
 trafficSplit:
   enabled: false
   service: classifier
+  port: 8002
   backends:
     - name: classifier-stable
       serviceSuffix: classifier
+      port: 8002
       weight: 90
     - name: classifier-canary
       serviceSuffix: classifier-canary
+      port: 8002
       weight: 10
