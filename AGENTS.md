@@ -9,6 +9,7 @@
 - Use uv for Python package management when appropriate.
 - Use git for version control
 - Use the GitHub gh CLI for creating pull requests.
+- Always add a brief PR summary when creating PRs.
 - Keep local changes minimal and incremental.
 
 ## Tooling
