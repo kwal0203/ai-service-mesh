@@ -2,13 +2,32 @@
 
 ## Install (local Proxmox)
 ```
-helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-local.yaml
+helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-local.yaml --create-namespace
+```
+
+If an install fails partway through, remove the release before retrying:
+```
+helm uninstall ai-mesh
+```
+
+## Local Images (Proxmox)
+Build and tag images to match `values-local.yaml` on a node that can load images
+into the cluster's container runtime:
+```
+docker build -t ai-mesh/gateway:dev -f services/gateway/Dockerfile .
+docker build -t ai-mesh/embedding:dev -f services/embedding/Dockerfile .
+docker build -t ai-mesh/classifier:dev -f services/classifier/Dockerfile .
+docker build -t ai-mesh/eval:dev -f services/eval/Dockerfile .
 ```
 
 ## Install (EKS)
 ```
 helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-eks.yaml
 ```
+
+## HPA + Linkerd
+When HPA is enabled with Linkerd injection, the chart sets proxy CPU requests
+via `mesh.proxyResources` to avoid `<unknown>` HPA targets.
 
 ## Traffic Split (Linkerd SMI)
 To enable a canary split, add a second service entry for the canary and enable the split in values:

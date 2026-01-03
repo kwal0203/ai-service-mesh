@@ -6,6 +6,9 @@ image:
 mesh:
   enabled: true
   inject: enabled
+  proxyResources:
+    cpuRequest: 10m
+    cpuLimit: 50m
 
 ingress:
   enabled: true
@@ -28,19 +31,19 @@ hpa:
 
 services:
   - name: gateway
-    image: ghcr.io/example/gateway:0.1.0
+    image: ai-mesh/gateway:0.1.0
     port: 8000
     path: /
   - name: embedding
-    image: ghcr.io/example/embedding-api:0.1.0
+    image: ai-mesh/embedding:0.1.0
     port: 8001
     path: /embedding
   - name: classifier
-    image: ghcr.io/example/classifier-api:0.1.0
+    image: ai-mesh/classifier:0.1.0
     port: 8002
     path: /classifier
   - name: eval
-    image: ghcr.io/example/eval-api:0.1.0
+    image: ai-mesh/eval:0.1.0
     port: 8003
     path: /eval
 

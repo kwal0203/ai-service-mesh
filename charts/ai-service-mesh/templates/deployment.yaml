@@ -23,6 +23,10 @@ spec:
       {{- if $.Values.mesh.enabled }}
       annotations:
         linkerd.io/inject: {{ $.Values.mesh.inject }}
+        {{- if $.Values.mesh.proxyResources }}
+        config.linkerd.io/proxy-cpu-request: {{ $.Values.mesh.proxyResources.cpuRequest | quote }}
+        config.linkerd.io/proxy-cpu-limit: {{ $.Values.mesh.proxyResources.cpuLimit | quote }}
+        {{- end }}
       {{- end }}
     spec:
       containers:
@@ -31,6 +35,18 @@ spec:
           imagePullPolicy: {{ $.Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .port }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .port }}
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
           resources:
             {{- toYaml $.Values.resources | nindent 12 }}
 ---
