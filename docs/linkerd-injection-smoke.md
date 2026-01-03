@@ -11,38 +11,7 @@ kubectl annotate namespace demo linkerd.io/inject=enabled
 
 ## Deploy a Minimal App
 ```bash
-cat <<'EOF' | kubectl -n demo apply -f -
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: web
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: web
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-        - name: web
-          image: nginx:alpine
-          ports:
-            - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: web
-spec:
-  selector:
-    app: web
-  ports:
-    - port: 80
-      targetPort: 80
-EOF
+kubectl apply -f k8s/linkerd-injection-smoke.yaml
 ```
 
 ## Verify Sidecar Injection
