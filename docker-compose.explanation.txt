@@ -1,0 +1,12 @@
+Why docker-compose is here
+- It provides a quick, local multi-service test without Kubernetes so you can validate routing and endpoints first.
+
+How to use it
+- Run `docker compose up --build` and hit:
+  - http://localhost:8000/healthz
+  - http://localhost:8001/healthz
+  - http://localhost:8002/healthz
+  - http://localhost:8003/healthz
+
+What to change later
+- Replace placeholder dependency installs with a shared base image or uv-based install once the Python packaging is finalized.

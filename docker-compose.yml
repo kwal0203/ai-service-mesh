@@ -1,0 +1,29 @@
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - embedding
+      - classifier
+      - eval
+  embedding:
+    build:
+      context: .
+      dockerfile: services/embedding/Dockerfile
+    ports:
+      - "8001:8001"
+  classifier:
+    build:
+      context: .
+      dockerfile: services/classifier/Dockerfile
+    ports:
+      - "8002:8002"
+  eval:
+    build:
+      context: .
+      dockerfile: services/eval/Dockerfile
+    ports:
+      - "8003:8003"
