@@ -24,6 +24,7 @@ Local and Docker-based testing options are documented in `docs/testing.md`.
 
 ## Linkerd
 Local setup and verification steps are in `docs/linkerd-setup.md`.
+Smoke test for namespace injection is in `docs/linkerd-injection-smoke.md`.
 
 ## Project Plan
 The detailed plan is in `plan.md`.
