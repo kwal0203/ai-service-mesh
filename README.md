@@ -28,5 +28,8 @@ Smoke test for namespace injection is in `docs/linkerd-injection-smoke.md`.
 Traffic split (canary) demo is in `docs/linkerd-traffic-split.md`.
 Viz dashboard screenshot steps are in `docs/linkerd-viz-dashboard.md`.
 
+## Autoscaling
+HPA demo steps are in `docs/hpa-demo.md`.
+
 ## Project Plan
 The detailed plan is in `plan.md`.
