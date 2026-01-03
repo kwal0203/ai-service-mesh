@@ -15,6 +15,9 @@ Repeat with other services by changing the module path and port:
 - `services.classifier.main:app` on 8002
 - `services.eval.main:app` on 8003
 
+You can then run a quick smoke test:
+- `scripts/smoke-test.sh`
+
 ## Option 2: Docker Compose
 Use this if you have Docker installed.
 
@@ -26,6 +29,14 @@ Use this if you have Docker installed.
    - `http://localhost:8002/healthz`
    - `http://localhost:8003/healthz`
 
+You can also use:
+- `scripts/smoke-test.sh`
+
 Notes
 - On Ubuntu, `sudo apt install docker.io` is the simplest Docker install.
 - If you use Podman, `sudo apt install podman-docker` is an option, but behavior can differ.
+
+## Helm Validation
+These checks verify that both local and EKS values render cleanly without a cluster.
+
+- `scripts/validate-helm.sh`
