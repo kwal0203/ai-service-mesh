@@ -1,4 +1,4 @@
-{{- range .Values.services }}
+{{- range (concat .Values.services .Values.canaryServices) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

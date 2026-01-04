@@ -20,6 +20,20 @@ docker build -t ai-mesh/classifier:dev -f services/classifier/Dockerfile .
 docker build -t ai-mesh/eval:dev -f services/eval/Dockerfile .
 ```
 
+## GHCR Images (Option 2)
+To use GitHub Container Registry (public), build and push:
+```
+docker build -t ghcr.io/kwal0203/ai-mesh-gateway:dev -f services/gateway/Dockerfile .
+docker build -t ghcr.io/kwal0203/ai-mesh-embedding:dev -f services/embedding/Dockerfile .
+docker build -t ghcr.io/kwal0203/ai-mesh-classifier:dev -f services/classifier/Dockerfile .
+docker build -t ghcr.io/kwal0203/ai-mesh-eval:dev -f services/eval/Dockerfile .
+
+docker push ghcr.io/kwal0203/ai-mesh-gateway:dev
+docker push ghcr.io/kwal0203/ai-mesh-embedding:dev
+docker push ghcr.io/kwal0203/ai-mesh-classifier:dev
+docker push ghcr.io/kwal0203/ai-mesh-eval:dev
+```
+
 ## Install (EKS)
 ```
 helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-eks.yaml
@@ -58,3 +72,6 @@ helm upgrade --install ai-mesh charts/ai-service-mesh \
   -f charts/ai-service-mesh/values-local.yaml \
   -f charts/ai-service-mesh/values-canary.yaml
 ```
+
+`values-canary.yaml` adds a `classifier-canary` deployment via `canaryServices`.
+Override the canary image tag to match your registry if needed.
