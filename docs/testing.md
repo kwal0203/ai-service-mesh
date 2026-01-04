@@ -40,6 +40,7 @@ Standalone workflow scripts:
 - `scripts/compare_texts.py`
 - `scripts/caption_image.py`
 Use `TIMEOUT_SECONDS=300` for `scripts/rag_lite.py` if the first call is slow.
+For captions, set `STYLE` and `LENGTH` in `scripts/caption_image.py`.
 
 ## Option 2: Docker Compose
 Use this if you have Docker installed.

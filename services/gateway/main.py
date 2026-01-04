@@ -232,10 +232,13 @@ async def caption(payload: CaptionRequest) -> CaptionResponse:
             vision_response.raise_for_status()
             predictions = VisionResponse.model_validate(vision_response.json()).predictions
             labels = [pred.label for pred in predictions]
+            scores = [pred.score for pred in predictions]
+            style = payload.style or "neutral"
+            length = payload.length or "short"
             prompt = (
-                "Write a short image caption using these labels: "
-                + ", ".join(labels)
-                + "."
+                "Write an image caption using these labels. "
+                f"Style: {style}. Length: {length}.\n"
+                "Labels: " + ", ".join(labels) + "."
             )
             llm_response = await client.post(
                 LLM_URL,
@@ -245,4 +248,4 @@ async def caption(payload: CaptionRequest) -> CaptionResponse:
             caption_text = GenerationResponse.model_validate(llm_response.json()).text
         except httpx.HTTPError as exc:
             raise HTTPException(status_code=502, detail=str(exc)) from exc
-    return CaptionResponse(labels=labels, caption=caption_text)
+    return CaptionResponse(labels=labels, scores=scores, caption=caption_text)
