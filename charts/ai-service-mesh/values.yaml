@@ -4,7 +4,7 @@ image:
   pullPolicy: IfNotPresent
 
 gateway:
-  requestTimeoutSeconds: 120
+  requestTimeoutSeconds: 300
 
 mesh:
   enabled: true

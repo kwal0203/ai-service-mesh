@@ -14,7 +14,7 @@ services:
       EVAL_URL: http://eval:8003/eval
       LLM_URL: http://llm:8004/generate
       VISION_URL: http://vision:8005/classify-image
-      REQUEST_TIMEOUT_SECONDS: "120"
+      REQUEST_TIMEOUT_SECONDS: "300"
     ports:
       - "8000:8000"
     depends_on:

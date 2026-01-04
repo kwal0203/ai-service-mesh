@@ -52,3 +52,40 @@ class VisionPrediction(BaseModel):
 
 class VisionResponse(BaseModel):
     predictions: list[VisionPrediction]
+
+
+class RagRequest(BaseModel):
+    question: str
+    top_k: int | None = None
+
+
+class RagSource(BaseModel):
+    id: str
+    source: str
+    text: str
+    score: float
+
+
+class RagResponse(BaseModel):
+    answer: str
+    sources: list[RagSource]
+
+
+class CompareRequest(BaseModel):
+    text_a: str
+    text_b: str
+
+
+class CompareResponse(BaseModel):
+    similarity: float
+    summary: str
+
+
+class CaptionRequest(BaseModel):
+    image_base64: str
+    top_k: int | None = None
+
+
+class CaptionResponse(BaseModel):
+    labels: list[str]
+    caption: str

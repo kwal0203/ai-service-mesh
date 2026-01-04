@@ -1,4 +1,5 @@
 import os
+import threading
 
 from fastapi import FastAPI
 from sentence_transformers import SentenceTransformer
@@ -7,12 +8,15 @@ from services.shared.schemas import EmbeddingRequest, EmbeddingResponse, HealthR
 app = FastAPI(title="embedding")
 MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
 _model: SentenceTransformer | None = None
+_model_lock = threading.Lock()
 
 
 def get_model() -> SentenceTransformer:
     global _model
     if _model is None:
-        _model = SentenceTransformer(MODEL_NAME)
+        with _model_lock:
+            if _model is None:
+                _model = SentenceTransformer(MODEL_NAME, device="cpu")
     return _model
 
 

@@ -6,7 +6,7 @@ ingress:
 storageClass: local-path
 
 gateway:
-  requestTimeoutSeconds: 120
+  requestTimeoutSeconds: 300
 
 resourceIsolation:
   enabled: true
