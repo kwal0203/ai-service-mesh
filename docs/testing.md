@@ -41,6 +41,14 @@ These checks verify that both local and EKS values render cleanly without a clus
 
 - `scripts/validate-helm.sh`
 
+## Storage (local-path)
+```
+kubectl get storageclass
+kubectl apply -f k8s/pvc-smoke.yaml
+kubectl get pvc -n demo
+kubectl delete -f k8s/pvc-smoke.yaml
+```
+
 ## Resource Isolation Verification
 If resource isolation is enabled in values, verify the namespace controls:
 
