@@ -11,13 +11,12 @@ This repo hosts a two-node, CPU-only Kubernetes service mesh demo that runs on P
 ## Repository Layout
 - charts/ : Helm chart(s) and environment-specific values
 - services/ : FastAPI services and gateway
-- infra/ : Terraform and supporting scripts
 - docs/ : diagrams, demo script, and screenshots
 
-## Next Steps
-1. Define the base Helm chart scaffold and values structure.
-2. Sketch service interfaces and resource budgets for the 2–3 APIs.
-3. Draft the demo flow (traffic split + HPA + metrics).
+## Status
+- Base Helm chart and values are in place.
+- Services + gateway are implemented with real ML endpoints.
+- Demo flow is documented and testable.
 
 ## Testing
 Local and Docker-based testing options are documented in `docs/testing.md`.
