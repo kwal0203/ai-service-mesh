@@ -7,12 +7,16 @@ This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service s
 - Port: 8000
 - Endpoints:
   - POST /predict: accepts a request and calls embedding + classifier
+  - POST /generate: proxy to the LLM service
+  - POST /classify-image: proxy to the vision service
   - GET /healthz
   - GET /metrics
 - Config:
   - EMBEDDING_URL (default: http://embedding:8001/embedding)
   - CLASSIFIER_URL (default: http://classifier:8002/classifier)
   - EVAL_URL (default: http://eval:8003/eval)
+  - LLM_URL (default: http://llm:8004/generate)
+  - VISION_URL (default: http://vision:8005/classify-image)
 
 ## Embedding API
 - Purpose: generate embeddings from text (CPU-only model)
@@ -35,6 +39,22 @@ This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service s
 - Port: 8003
 - Endpoints:
   - POST /eval: {"label": "...", "score": 0.0} -> {"pass": true}
+  - GET /healthz
+  - GET /metrics
+
+## LLM API
+- Purpose: small text generation (CPU-only)
+- Port: 8004
+- Endpoints:
+  - POST /generate: {"prompt": "..."} -> {"text": "..."}
+  - GET /healthz
+  - GET /metrics
+
+## Vision API
+- Purpose: pretrained CNN image classification
+- Port: 8005
+- Endpoints:
+  - POST /classify-image: {"image_base64": "..."} -> {"predictions": [...]}
   - GET /healthz
   - GET /metrics
 

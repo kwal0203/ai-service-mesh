@@ -37,6 +37,9 @@ Local-path storage notes are in `docs/storage.md`.
 ## Observability
 Prometheus + Grafana setup steps are in `docs/observability-setup.md`.
 
+## Demo Workflows
+Suggested end-to-end workflows are in `docs/workflows.md`.
+
 ## EKS Porting
 Minimal values diff and EKS notes are in `docs/eks-porting.md`.
 

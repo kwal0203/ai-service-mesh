@@ -16,4 +16,5 @@ def metrics() -> str:
 
 @app.post("/eval", response_model=EvalResponse)
 def eval_api(payload: EvalRequest) -> EvalResponse:
-    return EvalResponse(passed=True)
+    passed = payload.score >= 0.6 and payload.label == "high_confidence"
+    return EvalResponse(passed=passed)

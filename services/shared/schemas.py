@@ -29,3 +29,26 @@ class EvalRequest(BaseModel):
 
 class EvalResponse(BaseModel):
     passed: bool
+
+
+class GenerationRequest(BaseModel):
+    prompt: str
+    max_new_tokens: int | None = None
+
+
+class GenerationResponse(BaseModel):
+    text: str
+
+
+class VisionRequest(BaseModel):
+    image_base64: str
+    top_k: int | None = None
+
+
+class VisionPrediction(BaseModel):
+    label: str
+    score: float
+
+
+class VisionResponse(BaseModel):
+    predictions: list[VisionPrediction]
