@@ -74,11 +74,15 @@ class RagResponse(BaseModel):
 class CompareRequest(BaseModel):
     text_a: str
     text_b: str
+    style: str | None = None
+    format: str | None = None
 
 
 class CompareResponse(BaseModel):
     similarity: float
     summary: str
+    similarity_label: str
+    highlights: list[str] | None = None
 
 
 class CaptionRequest(BaseModel):

@@ -15,7 +15,7 @@ Talking points:
 ## 2) Document Similarity + Summary
 1. `/compare` with two text inputs.
 2. Cosine similarity on embeddings.
-3. LLM returns a one-sentence summary.
+3. LLM returns a summary (style/format configurable) with highlights.
 
 Talking points:
 - Embedding-based similarity.
