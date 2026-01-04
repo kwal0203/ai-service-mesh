@@ -96,3 +96,18 @@ class CaptionResponse(BaseModel):
     labels: list[str]
     caption: str
     scores: list[float] | None = None
+
+
+class RouteRequest(BaseModel):
+    query: str
+
+
+class RouteResult(BaseModel):
+    name: str
+    description: str
+    score: float
+
+
+class RouteResponse(BaseModel):
+    route: RouteResult
+    answer: str

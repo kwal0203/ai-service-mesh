@@ -29,3 +29,12 @@ Talking points:
 Talking points:
 - Pretrained CNN, no training required.
 - Multimodal pipeline on CPU-only hardware.
+
+## 4) Semantic Routing
+1. `/route` with a user query.
+2. Embeddings pick the best route (overview, observability, or EKS porting).
+3. LLM answers using route-specific context.
+
+Talking points:
+- Embedding-driven routing.
+- Modular answers with scoped context.
