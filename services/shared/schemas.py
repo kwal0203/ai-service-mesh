@@ -84,8 +84,11 @@ class CompareResponse(BaseModel):
 class CaptionRequest(BaseModel):
     image_base64: str
     top_k: int | None = None
+    style: str | None = None
+    length: str | None = None
 
 
 class CaptionResponse(BaseModel):
     labels: list[str]
     caption: str
+    scores: list[float] | None = None

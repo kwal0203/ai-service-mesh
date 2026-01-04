@@ -24,7 +24,7 @@ Talking points:
 ## 3) Image Caption (CNN + LLM)
 1. `/caption` with a base64 image.
 2. CNN returns top-K labels.
-3. LLM composes a short caption from labels.
+3. LLM composes a caption from labels (style/length configurable).
 
 Talking points:
 - Pretrained CNN, no training required.

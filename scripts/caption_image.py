@@ -15,8 +15,14 @@ def main() -> int:
     image_base64 = os.getenv("IMAGE_BASE64", SAMPLE_IMAGE)
     top_k = int(os.getenv("TOP_K", "3"))
     timeout = float(os.getenv("TIMEOUT_SECONDS", "120"))
+    style = os.getenv("STYLE")
+    length = os.getenv("LENGTH")
 
     payload = {"image_base64": image_base64, "top_k": top_k}
+    if style:
+        payload["style"] = style
+    if length:
+        payload["length"] = length
     response = httpx.post(f"{base_url}/caption", json=payload, timeout=timeout)
     response.raise_for_status()
     print(json.dumps(response.json(), indent=2))
