@@ -1,0 +1,16 @@
+{{- if .Values.resourceIsolation.enabled }}
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: {{ .Release.Name }}-limits
+  namespace: {{ .Release.Namespace }}
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: {{ .Values.resourceIsolation.limitRange.default.cpu | quote }}
+        memory: {{ .Values.resourceIsolation.limitRange.default.memory | quote }}
+      defaultRequest:
+        cpu: {{ .Values.resourceIsolation.limitRange.defaultRequest.cpu | quote }}
+        memory: {{ .Values.resourceIsolation.limitRange.defaultRequest.memory | quote }}
+{{- end }}
