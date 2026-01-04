@@ -201,11 +201,24 @@ async def compare(payload: CompareRequest) -> CompareResponse:
             vector_a = await embed_text(client, payload.text_a)
             vector_b = await embed_text(client, payload.text_b)
             similarity = cosine_similarity(vector_a, vector_b)
+            similarity_label = (
+                "high"
+                if similarity >= 0.75
+                else "medium"
+                if similarity >= 0.5
+                else "low"
+            )
+            style = payload.style or "neutral"
+            format_hint = payload.format or "sentence"
+            highlight_prompt = (
+                "Provide 2-3 bullet points starting with '- ' that compare the texts."
+            )
             prompt = (
-                "Compare the two texts in one sentence.\n"
+                f"Compare the two texts in a {format_hint}.\n"
+                f"Style: {style}.\n"
                 f"Text A: {payload.text_a}\n"
                 f"Text B: {payload.text_b}\n"
-                "Summary:"
+                f"{highlight_prompt}\nSummary:"
             )
             llm_response = await client.post(
                 LLM_URL,
@@ -215,7 +228,17 @@ async def compare(payload: CompareRequest) -> CompareResponse:
             summary = GenerationResponse.model_validate(llm_response.json()).text
         except httpx.HTTPError as exc:
             raise HTTPException(status_code=502, detail=str(exc)) from exc
-    return CompareResponse(similarity=similarity, summary=summary)
+    highlights = [
+        line.strip()[2:].strip()
+        for line in summary.splitlines()
+        if line.strip().startswith("- ")
+    ]
+    return CompareResponse(
+        similarity=similarity,
+        similarity_label=similarity_label,
+        summary=summary,
+        highlights=highlights or None,
+    )
 
 
 @app.post("/caption", response_model=CaptionResponse)
