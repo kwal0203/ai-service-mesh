@@ -23,6 +23,9 @@ from services.shared.schemas import (
     CompareResponse,
     CaptionRequest,
     CaptionResponse,
+    RouteRequest,
+    RouteResponse,
+    RouteResult,
     VisionRequest,
     VisionResponse,
 )
@@ -40,6 +43,24 @@ RAG_CORPUS_PATH = os.getenv("RAG_CORPUS_PATH")
 _corpus: list[dict[str, str]] = []
 _corpus_vectors: list[list[float]] | None = None
 logger = logging.getLogger("gateway")
+
+_routes = [
+    {
+        "name": "platform-overview",
+        "description": "Overview of the Proxmox-based Kubernetes platform and goals.",
+        "context": "The platform is a two-node Proxmox Kubernetes cluster that runs CPU-only AI services with service mesh and observability.",
+    },
+    {
+        "name": "observability",
+        "description": "Monitoring and metrics for the demo services.",
+        "context": "Prometheus scrapes metrics and Grafana visualizes latency, error rate, and HPA replica counts.",
+    },
+    {
+        "name": "eks-porting",
+        "description": "How the demo ports to AWS EKS.",
+        "context": "The same Helm chart deploys to EKS by swapping values for ingress and storage classes.",
+    },
+]
 
 
 def load_corpus() -> list[dict[str, str]]:
@@ -81,6 +102,11 @@ async def ensure_corpus_vectors(client: httpx.AsyncClient) -> list[list[float]]:
     tasks = [embed_text(client, item["text"]) for item in corpus]
     _corpus_vectors = await asyncio.gather(*tasks)
     return _corpus_vectors
+
+
+async def embed_routes(client: httpx.AsyncClient) -> list[list[float]]:
+    tasks = [embed_text(client, route["description"]) for route in _routes]
+    return await asyncio.gather(*tasks)
 
 
 @app.get("/healthz", response_model=HealthResponse)
@@ -272,3 +298,35 @@ async def caption(payload: CaptionRequest) -> CaptionResponse:
         except httpx.HTTPError as exc:
             raise HTTPException(status_code=502, detail=str(exc)) from exc
     return CaptionResponse(labels=labels, scores=scores, caption=caption_text)
+
+
+@app.post("/route", response_model=RouteResponse)
+async def route_query(payload: RouteRequest) -> RouteResponse:
+    timeout = httpx.Timeout(REQUEST_TIMEOUT_SECONDS)
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        try:
+            route_vectors = await embed_routes(client)
+            query_vector = await embed_text(client, payload.query)
+            scores = [cosine_similarity(query_vector, vector) for vector in route_vectors]
+            best_idx = max(range(len(scores)), key=scores.__getitem__)
+            selected = _routes[best_idx]
+            route = RouteResult(
+                name=selected["name"],
+                description=selected["description"],
+                score=scores[best_idx],
+            )
+            prompt = (
+                "Answer the user query using the provided context.\n"
+                f"Context: {selected['context']}\n"
+                f"Query: {payload.query}\n"
+                "Answer:"
+            )
+            llm_response = await client.post(
+                LLM_URL,
+                json=GenerationRequest(prompt=prompt, max_new_tokens=96).model_dump(),
+            )
+            llm_response.raise_for_status()
+            answer = GenerationResponse.model_validate(llm_response.json()).text
+        except httpx.HTTPError as exc:
+            raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return RouteResponse(route=route, answer=answer)

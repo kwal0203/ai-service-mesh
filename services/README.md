@@ -8,6 +8,7 @@ This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service s
 - Endpoints:
   - POST /predict: accepts a request and calls embedding + classifier
   - POST /rag-lite: question answering with local corpus
+  - POST /route: semantic routing with scoped context
   - POST /compare: semantic similarity + summary (style/format controls)
   - POST /generate: proxy to the LLM service
   - POST /caption: image labels + caption

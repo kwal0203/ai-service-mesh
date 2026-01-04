@@ -22,6 +22,7 @@ Set `RUN_ML_SMOKE=1` to exercise all ML endpoints via the gateway (may download 
 To run a subset, use one or more of:
 - `RUN_PREDICT_SMOKE=1`
 - `RUN_RAG_SMOKE=1`
+- `RUN_ROUTE_SMOKE=1`
 - `RUN_COMPARE_SMOKE=1`
 - `RUN_LLM_SMOKE=1`
 - `RUN_CAPTION_SMOKE=1`
@@ -39,6 +40,7 @@ Standalone workflow scripts:
 - `scripts/rag_lite.py`
 - `scripts/compare_texts.py`
 - `scripts/caption_image.py`
+- `scripts/route_query.py`
 Use `TIMEOUT_SECONDS=300` for `scripts/rag_lite.py` if the first call is slow.
 For captions, set `STYLE` and `LENGTH` in `scripts/caption_image.py`.
 For compare, set `STYLE` or `FORMAT` in `scripts/compare_texts.py`.

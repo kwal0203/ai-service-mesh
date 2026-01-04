@@ -41,6 +41,14 @@ if [[ "${RUN_RAG_SMOKE:-0}" == "1" ]]; then
   printf "ok\n"
 fi
 
+if [[ "${RUN_ROUTE_SMOKE:-0}" == "1" ]]; then
+  printf "Checking route... "
+  curl -fsS -X POST "$base_url:8000/route" \
+    -H "Content-Type: application/json" \
+    -d '{"query":"How do you monitor latency and errors?"}' >/dev/null
+  printf "ok\n"
+fi
+
 if [[ "${RUN_COMPARE_SMOKE:-0}" == "1" ]]; then
   printf "Checking compare... "
   curl -fsS -X POST "$base_url:8000/compare" \
