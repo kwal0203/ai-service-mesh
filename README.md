@@ -40,6 +40,9 @@ Local-path storage notes are in `docs/storage.md`.
 ## Observability
 Prometheus + Grafana setup steps are in `docs/observability-setup.md`.
 
+## Demo Script
+The demo flow is in `docs/demo-script.md`.
+
 ## Demo Workflows
 Suggested end-to-end workflows are in `docs/workflows.md`.
 
