@@ -31,6 +31,9 @@ Viz dashboard screenshot steps are in `docs/linkerd-viz-dashboard.md`.
 ## Autoscaling
 HPA demo steps are in `docs/hpa-demo.md`.
 
+## Architecture
+Architecture overview is in `docs/architecture.md`.
+
 ## Storage
 Local-path storage notes are in `docs/storage.md`.
 
