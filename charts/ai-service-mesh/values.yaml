@@ -3,6 +3,9 @@ namespace: ai-mesh
 image:
   pullPolicy: IfNotPresent
 
+gateway:
+  requestTimeoutSeconds: 120
+
 mesh:
   enabled: true
   inject: enabled
@@ -66,6 +69,14 @@ services:
     image: ai-mesh/eval:0.1.0
     port: 8003
     path: /eval
+  - name: llm
+    image: ai-mesh/llm:0.1.0
+    port: 8004
+    path: /generate
+  - name: vision
+    image: ai-mesh/vision:0.1.0
+    port: 8005
+    path: /classify-image
 
 canaryServices: []
 

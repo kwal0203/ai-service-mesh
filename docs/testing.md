@@ -17,6 +17,15 @@ Repeat with other services by changing the module path and port:
 
 You can then run a quick smoke test:
 - `scripts/smoke-test.sh`
+Set `RUN_ML_SMOKE=1` to exercise ML endpoints via the gateway (may download models).
+If the first request times out, increase `REQUEST_TIMEOUT_SECONDS` for the gateway.
+Docker Compose builds a shared `ml-base` image once to avoid repeated downloads.
+Build order for Docker Compose:
+```
+docker compose build ml-base
+docker compose build embedding llm vision
+docker compose build
+```
 
 ## Option 2: Docker Compose
 Use this if you have Docker installed.
@@ -31,6 +40,7 @@ Use this if you have Docker installed.
 
 You can also use:
 - `scripts/smoke-test.sh`
+Set `RUN_ML_SMOKE=1` to exercise ML endpoints via the gateway (may download models).
 
 Notes
 - On Ubuntu, `sudo apt install docker.io` is the simplest Docker install.

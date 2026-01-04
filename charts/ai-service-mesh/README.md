@@ -18,6 +18,8 @@ docker build -t ai-mesh/gateway:dev -f services/gateway/Dockerfile .
 docker build -t ai-mesh/embedding:dev -f services/embedding/Dockerfile .
 docker build -t ai-mesh/classifier:dev -f services/classifier/Dockerfile .
 docker build -t ai-mesh/eval:dev -f services/eval/Dockerfile .
+docker build -t ai-mesh/llm:dev -f services/llm/Dockerfile .
+docker build -t ai-mesh/vision:dev -f services/vision/Dockerfile .
 ```
 
 ## GHCR Images (Option 2)
@@ -27,11 +29,15 @@ docker build -t ghcr.io/kwal0203/ai-mesh-gateway:dev -f services/gateway/Dockerf
 docker build -t ghcr.io/kwal0203/ai-mesh-embedding:dev -f services/embedding/Dockerfile .
 docker build -t ghcr.io/kwal0203/ai-mesh-classifier:dev -f services/classifier/Dockerfile .
 docker build -t ghcr.io/kwal0203/ai-mesh-eval:dev -f services/eval/Dockerfile .
+docker build -t ghcr.io/kwal0203/ai-mesh-llm:dev -f services/llm/Dockerfile .
+docker build -t ghcr.io/kwal0203/ai-mesh-vision:dev -f services/vision/Dockerfile .
 
 docker push ghcr.io/kwal0203/ai-mesh-gateway:dev
 docker push ghcr.io/kwal0203/ai-mesh-embedding:dev
 docker push ghcr.io/kwal0203/ai-mesh-classifier:dev
 docker push ghcr.io/kwal0203/ai-mesh-eval:dev
+docker push ghcr.io/kwal0203/ai-mesh-llm:dev
+docker push ghcr.io/kwal0203/ai-mesh-vision:dev
 ```
 
 ## Install (EKS)

@@ -1,4 +1,9 @@
 services:
+  ml-base:
+    build:
+      context: .
+      dockerfile: services/ml-base/Dockerfile
+    image: ai-mesh-ml-base:dev
   gateway:
     build:
       context: .
@@ -7,16 +12,23 @@ services:
       EMBEDDING_URL: http://embedding:8001/embedding
       CLASSIFIER_URL: http://classifier:8002/classifier
       EVAL_URL: http://eval:8003/eval
+      LLM_URL: http://llm:8004/generate
+      VISION_URL: http://vision:8005/classify-image
+      REQUEST_TIMEOUT_SECONDS: "120"
     ports:
       - "8000:8000"
     depends_on:
       - embedding
       - classifier
       - eval
+      - llm
+      - vision
   embedding:
     build:
       context: .
       dockerfile: services/embedding/Dockerfile
+    depends_on:
+      - ml-base
     ports:
       - "8001:8001"
   classifier:
@@ -31,3 +43,19 @@ services:
       dockerfile: services/eval/Dockerfile
     ports:
       - "8003:8003"
+  llm:
+    build:
+      context: .
+      dockerfile: services/llm/Dockerfile
+    depends_on:
+      - ml-base
+    ports:
+      - "8004:8004"
+  vision:
+    build:
+      context: .
+      dockerfile: services/vision/Dockerfile
+    depends_on:
+      - ml-base
+    ports:
+      - "8005:8005"

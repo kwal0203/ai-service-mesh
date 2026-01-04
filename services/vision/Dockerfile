@@ -8,5 +8,5 @@ RUN pip install --no-cache-dir --timeout 120 --retries 5 \
 
 COPY services /app/services
 
-EXPOSE 8001
-CMD ["uvicorn", "services.embedding.main:app", "--host", "0.0.0.0", "--port", "8001"]
+EXPOSE 8005
+CMD ["uvicorn", "services.vision.main:app", "--host", "0.0.0.0", "--port", "8005"]

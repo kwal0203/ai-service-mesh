@@ -43,6 +43,12 @@ spec:
               value: http://{{ include "ai-service-mesh.fullname" $ }}-classifier:8002/classifier
             - name: EVAL_URL
               value: http://{{ include "ai-service-mesh.fullname" $ }}-eval:8003/eval
+            - name: LLM_URL
+              value: http://{{ include "ai-service-mesh.fullname" $ }}-llm:8004/generate
+            - name: VISION_URL
+              value: http://{{ include "ai-service-mesh.fullname" $ }}-vision:8005/classify-image
+            - name: REQUEST_TIMEOUT_SECONDS
+              value: {{ $.Values.gateway.requestTimeoutSeconds | quote }}
           {{- end }}
           readinessProbe:
             httpGet:

@@ -5,6 +5,9 @@ ingress:
 
 storageClass: local-path
 
+gateway:
+  requestTimeoutSeconds: 120
+
 resourceIsolation:
   enabled: true
   quota:
@@ -44,3 +47,11 @@ services:
     image: ghcr.io/kwal0203/ai-mesh-eval:dev
     port: 8003
     path: /eval
+  - name: llm
+    image: ghcr.io/kwal0203/ai-mesh-llm:dev
+    port: 8004
+    path: /generate
+  - name: vision
+    image: ghcr.io/kwal0203/ai-mesh-vision:dev
+    port: 8005
+    path: /classify-image
