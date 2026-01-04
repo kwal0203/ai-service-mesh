@@ -40,6 +40,11 @@ Local-path storage notes are in `docs/storage.md`.
 ## Observability
 Prometheus + Grafana setup steps are in `docs/observability-setup.md`.
 
+## Networking + Resource Isolation
+The demo uses Linkerd mTLS and NetworkPolicy for service-level isolation, plus ResourceQuota and
+LimitRange to enforce namespace resource budgets. See `charts/ai-service-mesh/README.md` for
+configuration details and `docs/testing.md` for verification steps.
+
 ## Demo Script
 The demo flow is in `docs/demo-script.md`.
 
