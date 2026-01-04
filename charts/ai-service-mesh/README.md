@@ -43,6 +43,37 @@ helm install ai-mesh charts/ai-service-mesh -f charts/ai-service-mesh/values-eks
 When HPA is enabled with Linkerd injection, the chart sets proxy CPU requests
 via `mesh.proxyResources` to avoid `<unknown>` HPA targets.
 
+## Resource Isolation (Quota + LimitRange)
+Enable namespace-level resource isolation with a ResourceQuota and LimitRange:
+```
+resourceIsolation:
+  enabled: true
+  quota:
+    pods: "12"
+    requestsCpu: "2"
+    requestsMemory: "4Gi"
+    limitsCpu: "4"
+    limitsMemory: "8Gi"
+  limitRange:
+    default:
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest:
+      cpu: 100m
+      memory: 256Mi
+```
+
+## NetworkPolicy (Ingress Isolation)
+Restrict ingress to same-namespace pods plus selected namespaces:
+```
+networkPolicy:
+  enabled: true
+  allowIngressFromNamespaces:
+    - ingress-nginx
+    - monitoring
+```
+This uses the `kubernetes.io/metadata.name` namespace label.
+
 ## Traffic Split (Gateway API HTTPRoute)
 To enable a canary split with Gateway API HTTPRoute, add a second service entry
 for the canary and enable the split in values:

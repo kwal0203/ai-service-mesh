@@ -1,0 +1,14 @@
+{{- if .Values.resourceIsolation.enabled }}
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: {{ .Release.Name }}-quota
+  namespace: {{ .Release.Namespace }}
+spec:
+  hard:
+    pods: {{ .Values.resourceIsolation.quota.pods | quote }}
+    requests.cpu: {{ .Values.resourceIsolation.quota.requestsCpu | quote }}
+    requests.memory: {{ .Values.resourceIsolation.quota.requestsMemory | quote }}
+    limits.cpu: {{ .Values.resourceIsolation.quota.limitsCpu | quote }}
+    limits.memory: {{ .Values.resourceIsolation.quota.limitsMemory | quote }}
+{{- end }}
