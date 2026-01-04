@@ -31,5 +31,8 @@ Viz dashboard screenshot steps are in `docs/linkerd-viz-dashboard.md`.
 ## Autoscaling
 HPA demo steps are in `docs/hpa-demo.md`.
 
+## Observability
+Prometheus + Grafana setup steps are in `docs/observability-setup.md`.
+
 ## Project Plan
 The detailed plan is in `plan.md`.

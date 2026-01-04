@@ -20,6 +20,7 @@
 ## 4) Observability Story
 - Use Prometheus/Grafana to show request latency and error rate.
 - Show Linkerd per-service success rate.
+- Show Grafana dashboard for service metrics.
 
 ## 5) EKS Portability
 - Deploy with values-eks.yaml.
