@@ -40,3 +40,10 @@ Notes
 These checks verify that both local and EKS values render cleanly without a cluster.
 
 - `scripts/validate-helm.sh`
+
+## Resource Isolation Verification
+If resource isolation is enabled in values, verify the namespace controls:
+
+```
+kubectl -n ai-mesh get resourcequota,limitrange,networkpolicy
+```
