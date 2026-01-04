@@ -1,3 +1,9 @@
+canaryServices:
+  - name: classifier-canary
+    image: ghcr.io/kwal0203/ai-mesh-classifier:canary
+    port: 8002
+    path: /classifier-canary
+
 trafficSplit:
   enabled: true
   service: classifier

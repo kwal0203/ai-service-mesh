@@ -7,18 +7,18 @@ storageClass: local-path
 
 services:
   - name: gateway
-    image: ai-mesh/gateway:dev
+    image: ghcr.io/kwal0203/ai-mesh-gateway:dev
     port: 8000
     path: /
   - name: embedding
-    image: ai-mesh/embedding:dev
+    image: ghcr.io/kwal0203/ai-mesh-embedding:dev
     port: 8001
     path: /embedding
   - name: classifier
-    image: ai-mesh/classifier:dev
+    image: ghcr.io/kwal0203/ai-mesh-classifier:dev
     port: 8002
     path: /classifier
   - name: eval
-    image: ai-mesh/eval:dev
+    image: ghcr.io/kwal0203/ai-mesh-eval:dev
     port: 8003
     path: /eval

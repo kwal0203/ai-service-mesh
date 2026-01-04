@@ -1,5 +1,5 @@
 {{- if .Values.hpa.enabled }}
-{{- range .Values.services }}
+{{- range (concat .Values.services .Values.canaryServices) }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

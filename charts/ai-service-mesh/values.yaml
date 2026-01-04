@@ -47,6 +47,8 @@ services:
     port: 8003
     path: /eval
 
+canaryServices: []
+
 trafficSplit:
   enabled: false
   service: classifier

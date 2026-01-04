@@ -14,7 +14,7 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          {{- range .Values.services }}
+          {{- range (concat .Values.services .Values.canaryServices) }}
           - path: {{ .path }}
             pathType: Prefix
             backend:
