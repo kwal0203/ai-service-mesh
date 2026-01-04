@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mesh-overview",
+    "source": "docs/overview",
+    "text": "The AI service mesh demo runs on a two-node Proxmox cluster and ports cleanly to AWS EKS. It showcases traffic splitting, autoscaling, and observability across FastAPI services."
+  },
+  {
+    "id": "linkerd-traffic",
+    "source": "docs/linkerd",
+    "text": "Linkerd provides mTLS and traffic splitting via the Gateway API. Canary traffic is routed with HTTPRoute backends and weights."
+  },
+  {
+    "id": "hpa-autoscale",
+    "source": "docs/hpa",
+    "text": "Horizontal Pod Autoscaling uses CPU utilization to scale services. The demo shows scale-up under load and scale-down once metrics drop."
+  },
+  {
+    "id": "observability",
+    "source": "docs/observability",
+    "text": "Prometheus scrapes metrics and Grafana visualizes request latency, error rate, and replica counts for the demo services."
+  },
+  {
+    "id": "eks-porting",
+    "source": "docs/eks",
+    "text": "The same Helm chart deploys to EKS by swapping values for ingress and storage classes, keeping workloads consistent across environments."
+  },
+  {
+    "id": "ml-services",
+    "source": "docs/services",
+    "text": "The system includes embedding, classifier, eval, LLM, and vision services. The gateway orchestrates these services for end-to-end workflows."
+  }
+]

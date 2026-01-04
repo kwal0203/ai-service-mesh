@@ -7,7 +7,10 @@ This demo uses 2–3 FastAPI services plus a lightweight gateway. Each service s
 - Port: 8000
 - Endpoints:
   - POST /predict: accepts a request and calls embedding + classifier
+  - POST /rag-lite: question answering with local corpus
+  - POST /compare: semantic similarity + summary
   - POST /generate: proxy to the LLM service
+  - POST /caption: image labels + caption
   - POST /classify-image: proxy to the vision service
   - GET /healthz
   - GET /metrics

@@ -11,8 +11,8 @@ dependencies = [
     "pydantic>=2.6",
     "pillow>=10.2",
     "sentence-transformers>=2.6",
-    "torch==2.2.2",
-    "torchvision==0.17.2",
+    "torch @ https://download.pytorch.org/whl/cpu/torch-2.2.2%2Bcpu-cp312-cp312-linux_x86_64.whl",
+    "torchvision @ https://download.pytorch.org/whl/cpu/torchvision-0.17.2%2Bcpu-cp312-cp312-linux_x86_64.whl",
     "transformers>=4.39",
     "uvicorn>=0.27",
 ]
