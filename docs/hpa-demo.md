@@ -28,6 +28,10 @@ kubectl -n demo delete pod hpa-load --ignore-not-found
 kubectl -n demo run hpa-load --image=busybox --command -- \
   /bin/sh -c "while true; do wget -q -O- http://hpa-demo; done"
 ```
+Or use the helper script:
+```bash
+scripts/hpa-load.sh run demo
+```
 
 ## Watch Scaling
 ```bash
@@ -39,4 +43,8 @@ If `TARGETS` stays `<unknown>`, ensure the `hpa-demo` pod is Running and
 ## Cleanup
 ```bash
 kubectl -n demo delete pod hpa-load --ignore-not-found
+```
+Or:
+```bash
+scripts/hpa-load.sh cleanup demo
 ```
