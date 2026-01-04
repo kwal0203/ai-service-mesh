@@ -34,5 +34,8 @@ HPA demo steps are in `docs/hpa-demo.md`.
 ## Observability
 Prometheus + Grafana setup steps are in `docs/observability-setup.md`.
 
+## EKS Porting
+Minimal values diff and EKS notes are in `docs/eks-porting.md`.
+
 ## Project Plan
 The detailed plan is in `plan.md`.
